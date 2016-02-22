@@ -12,18 +12,15 @@ import {toolbarComponent} from '../toolbar/toolbar';
                     <header></header>
 
                     <div class="contentWrapper">
-                    <toolbar></toolbar>
-                    <h1 class="title">DAYLY VIEW</h1>
-                     <table class="calendar">
-                        <tr class="tableRow" *ngFor="#tableRow of tableRows; #i=index">
-                            <td class="timingCol">{{tableRow.time}}</td>
-                            <td class="tableCol" [ngClass]="{backgroundRed: tableRow.disabled}" ></td>
-                        </tr>
-                    </table>
+                        <toolbar></toolbar>
+                        <h1 class="title">Month View</h1>
+                        <div class="timingCol" style="display: inline-block" *ngFor="#tableRow of weekRows; #i=index">
+                           {{tableRow.day}}
+                        </div>
                     </div>
                 </div>`,
     directives: [headerComponent,toolbarComponent],
-    styles:[`
+    styles:[`5 6 7 8
     .calendar {
         border-spacing: 1px;
         width: 90%;
@@ -42,13 +39,16 @@ import {toolbarComponent} from '../toolbar/toolbar';
         background-color: #ddd;
     }
     .timingCol {
-        width: 10%;
+        width: 12%;
+        height: 150px;
+        margin: 5px;
+        border-radius: 10px;
         border: 1px solid #ddd;
         text-align: center;
     }
     .tableRow {
         cursor: pointer;
-        height: 40px;
+        height: 300px;
     }
     .title {
         text-align: -webkit-center;
@@ -66,9 +66,9 @@ import {toolbarComponent} from '../toolbar/toolbar';
   `]
 })
 
-export class HomeComponent  {
+export class MonthViewComponent  {
 
-    public tableRows = [];
+    public weekRows = [];
 
     constructor() {
 
@@ -77,23 +77,20 @@ export class HomeComponent  {
     ngOnInit() {
         this.createCalendar();
     }
+    daysInMonth(month,year) {
+        return new Date(year, month, 0).getDate();
+    }
 
     createCalendar(){
         var date = new Date(0,0,0);
-        for (var i = 0; i < 24; i++) {
-            var timeString = date.toTimeString().slice(0,8);
+        var year = date.getFullYear();
+        var month = date.getMonth();
+        var countOfDay = this.daysInMonth(year,month);
+        for (var i = 1; i <= countOfDay; i++) {
             var row = {
-                template: "<tr></tr>",
-                time: timeString,
-                disabled: false
-            }
-            var hours = date.getHours();
-            if (hours > 20 || hours < 8) {
-                row.disabled = true;
-            }
-            console.log(date);
-            this.tableRows.push(row);
-            date.setHours(date.getHours() + 1);
+                day: i
+            };
+            this.weekRows.push(row);
         }
     }
 

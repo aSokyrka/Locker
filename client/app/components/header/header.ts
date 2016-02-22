@@ -3,15 +3,15 @@ import {Component, OnInit} from 'angular2/core';
 @Component({
     selector: 'header',
     template: `<div class="header">
-                    <button class="lc_button">
+                    <a class="lc_button" href="/dailyView">
                         Day
-                    </button>
-                    <button class="lc_button">
+                    </a>
+                    <a class="lc_button">
+                        Weekly
+                    </a>
+                    <a class="lc_button" href="/monthView">
                         Month
-                    </button>
-                    <button class="lc_button">
-                        Year
-                    </button>
+                    </a>
                 </div>`,
     styles:[`
         .lc_button {
