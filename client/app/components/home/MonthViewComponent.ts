@@ -10,11 +10,10 @@ import {toolbarComponent} from '../toolbar/toolbar';
     template: `
                 <div class="mainWrapper">
                     <header></header>
-
                     <div class="contentWrapper">
                         <toolbar></toolbar>
                         <h1 class="title">Month View</h1>
-                        <div class="timingCol" style="display: inline-block" *ngFor="#tableRow of weekRows; #i=index">
+                        <div class="timingCol" style="display: inline-block" *ngFor="#tableRow of weekRows; #i=index" onclick="javascript:location.href='/dailyView'">
                            {{tableRow.day}}
                         </div>
                     </div>
