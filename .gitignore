@@ -41,4 +41,5 @@ client/**/*.js
 server/**/*.js.map
 server/**/*.js
 
+.idea
 dist
