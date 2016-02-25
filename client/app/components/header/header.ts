@@ -63,7 +63,7 @@ import {Component, OnInit} from 'angular2/core';
 `]
 })
 
-export class headerComponent implements OnInit {
+export class HeaderComponent implements OnInit {
 
     constructor() { }
 

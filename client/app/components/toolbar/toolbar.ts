@@ -123,7 +123,7 @@ import {Component, OnInit} from 'angular2/core';
     `]
 })
 
-export class toolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit {
 
     constructor() { }
 

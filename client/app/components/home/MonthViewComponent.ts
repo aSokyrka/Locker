@@ -1,6 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
-import {headerComponent} from '../header/header';
-import {toolbarComponent} from '../toolbar/toolbar';
+import {HeaderComponent} from '../header/Header';
+import {ToolbarComponent} from '../toolbar/Toolbar';
 
 
 
@@ -10,15 +10,15 @@ import {toolbarComponent} from '../toolbar/toolbar';
     template: `
                 <div class="mainWrapper">
                     <header></header>
+                    <toolbar></toolbar>
                     <div class="contentWrapper">
-                        <toolbar></toolbar>
                         <h1 class="title">Month View</h1>
                         <div class="timingCol" style="display: inline-block" *ngFor="#tableRow of weekRows; #i=index" onclick="javascript:location.href='/dailyView'">
                            {{tableRow.day}}
                         </div>
                     </div>
                 </div>`,
-    directives: [headerComponent,toolbarComponent],
+    directives: [HeaderComponent,ToolbarComponent],
     styles:[`5 6 7 8
     .calendar {
         border-spacing: 1px;

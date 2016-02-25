@@ -1,6 +1,6 @@
 import {Component, OnInit} from 'angular2/core';
-import {headerComponent} from '../header/header';
-import {toolbarComponent} from '../toolbar/toolbar';
+import {HeaderComponent} from '../header/Header';
+import {ToolbarComponent} from '../toolbar/Toolbar';
 
 
 
@@ -22,7 +22,7 @@ import {toolbarComponent} from '../toolbar/toolbar';
                     </table>
                     </div>
                 </div>`,
-    directives: [headerComponent,toolbarComponent],
+    directives: [HeaderComponent,ToolbarComponent],
     styles:[`
     .calendar {
         border-spacing: 1px;

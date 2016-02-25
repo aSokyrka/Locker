@@ -1,14 +1,16 @@
 import {Component} from 'angular2/core';
-import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router'
+import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
-import {DailyComponent} from '../home/DailyComponent'
-import {AboutComponent} from '../about/AboutComponent'
-import {MonthViewComponent} from '../home/MonthViewComponent'
+import {DailyComponent} from '../home/DailyComponent';
+import {AboutComponent} from '../about/AboutComponent';
+import {MonthViewComponent} from '../home/MonthViewComponent';
+import {HomeComponent} from '../home/HomeComponent';
 
 @RouteConfig([
     {path: '/dailyView', component: DailyComponent, as: 'DailyView'},
     {path: '/about', component: AboutComponent, as: 'About'},
-    {path: '/monthView', component: MonthViewComponent, as: 'MonthView'}
+    {path: '/monthView', component: MonthViewComponent, as: 'MonthView'},
+    {path: '/', component: HomeComponent, as: 'HomeComponent'}
 ])
 @Component({
     selector: 'my-app',
