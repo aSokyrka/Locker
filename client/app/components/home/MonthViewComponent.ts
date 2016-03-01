@@ -1,23 +1,18 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
 import {HeaderComponent} from '../header/Header';
 import {ToolbarComponent} from '../toolbar/Toolbar';
+import {CalendarTypes} from '../../infoBeans/CalendarTypes';
 
 
 
 @Component({
-    selector: 'home',
+    selector: 'monthViewCalendar',
     providers: [],
     template: `
-                <div class="mainWrapper">
-                    <header></header>
-                    <toolbar></toolbar>
-                    <div class="contentWrapper">
-                        <h1 class="title">Month View</h1>
-                        <div class="timingCol" style="display: inline-block" *ngFor="#tableRow of weekRows; #i=index" onclick="javascript:location.href='/dailyView'">
-                           {{tableRow.day}}
-                        </div>
-                    </div>
-                </div>`,
+                <div class="timingCol" *ngFor="#tableRow of weekRows; #i=index"  on-click="toggleViewType(CalendarTypes.daily)">
+                   {{tableRow.day}}
+                </div>
+                   `,
     directives: [HeaderComponent,ToolbarComponent],
     styles:[`5 6 7 8
     .calendar {
@@ -44,6 +39,11 @@ import {ToolbarComponent} from '../toolbar/Toolbar';
         border-radius: 10px;
         border: 1px solid #ddd;
         text-align: center;
+        float: left;
+        cursor: pointer;
+    }
+    .timingCol:hover {
+        background-color: #ddd;
     }
     .tableRow {
         cursor: pointer;
@@ -68,6 +68,13 @@ import {ToolbarComponent} from '../toolbar/Toolbar';
 export class MonthViewComponent  {
 
     public weekRows = [];
+    public CalendarTypes = CalendarTypes;
+
+    @Output() toggleType = new EventEmitter();
+
+    toggleViewType(type) {
+        this.toggleType.emit(type);
+    }
 
     constructor() {
 

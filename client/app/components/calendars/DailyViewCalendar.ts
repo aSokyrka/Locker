@@ -1,7 +1,7 @@
-import {Component, OnInit, TemplateRef, ContentChild } from 'angular2/core';
+import {Component, OnInit, TemplateRef, ContentChild,Attribute } from 'angular2/core';
 import {COMMON_DIRECTIVES, CORE_DIRECTIVES } from 'angular2/common';
 import {TimingConstants} from '../../Constants/TimingConstants';
-
+import {RulesService} from '../../Services/RulesService';
 
 
 
@@ -13,7 +13,7 @@ import {TimingConstants} from '../../Constants/TimingConstants';
                     <table class="calendar-table" >
                         <tr class="tableRow" *ngFor="#tableRow of tableRows; #i=index">
                             <td class="timingCol">{{tableRow.time}}</td>
-                            <td class="tableCol" [ngClass]="{hidden: isWeeklyView,backgroundRed: tableRow.disabled}"> </td>
+                            <td class="tableCol" [ngClass]="{hidden: isWeeklyView,backgroundRed: tableRow.disabled}" attr.rowId={{tableRow.rowId}} on-click="updateRow($event)"> </td>
                             <template ngFor [ngForOf]="cols" [ngForTemplate]="itemTmpl"></template>
                         </tr>
                     </table>
@@ -67,7 +67,7 @@ export class DailyViewCalendar implements OnInit  {
 
     @ContentChild(TemplateRef) itemTmpl;
 
-    constructor() {
+    constructor(public RulesService:RulesService) {
         this.tableRows = [];
     }
 
@@ -76,24 +76,16 @@ export class DailyViewCalendar implements OnInit  {
     }
 
     createCalendar(){
-        var date = new Date(0,0,0);
-
-        for (var i = 0; i < TimingConstants.hoursInDay; i++) {
-            var timeString = date.toTimeString().slice(0,8);
-            var row = {
-                time: timeString,
-                disabled: false
-            }
-            var hours = date.getHours();
-            if (hours > 20 || hours < 8) {
-                row.disabled = true;
-            }
-            this.tableRows.push(row);
-            date.setHours(date.getHours() + 1);
-        }
+        var rows = this.RulesService.getRows();
+        this.tableRows = rows;
     }
 
-
+    updateRow (event) {
+        var id = event.target.getAttribute('rowId');
+        this.RulesService.updateRow(parseInt(id));
+        var rows = this.RulesService.getRows();
+        this.tableRows = rows;
+    }
 
 
 }

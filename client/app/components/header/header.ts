@@ -1,15 +1,16 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit, Output, EventEmitter} from 'angular2/core';
+import {CalendarTypes} from '../../infoBeans/CalendarTypes';
 
 @Component({
     selector: 'header',
     template: `<div class="header">
-                    <a class="lc_button" href="/dailyView">
+                    <a class="lc_button" on-click="toggleViewType(CalendarTypes.daily)" >
                         Day
                     </a>
-                    <a class="lc_button">
+                    <a class="lc_button" on-click="toggleViewType(CalendarTypes.weekly)">
                         Weekly
                     </a>
-                    <a class="lc_button" href="/monthView">
+                    <a class="lc_button" on-click="toggleViewType(CalendarTypes.monthly)">
                         Month
                     </a>
                 </div>`,
@@ -64,6 +65,14 @@ import {Component, OnInit} from 'angular2/core';
 })
 
 export class HeaderComponent implements OnInit {
+
+    public CalendarTypes = CalendarTypes;
+
+    @Output() toggleType = new EventEmitter();
+
+    toggleViewType(type) {
+        this.toggleType.emit(type);
+    }
 
     constructor() { }
 

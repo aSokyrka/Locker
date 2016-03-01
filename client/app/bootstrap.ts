@@ -4,9 +4,12 @@ import {CORE_DIRECTIVES} from 'angular2/common'
 import {ROUTER_BINDINGS, ROUTER_PROVIDERS, LocationStrategy, PathLocationStrategy} from 'angular2/router'
 
 import {AppComponent} from './components/app/AppComponent'
+import {RulesService} from './Services/RulesService'
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
     CORE_DIRECTIVES,
-    provide(LocationStrategy, {useClass: PathLocationStrategy})
+    RulesService,
+    provide(LocationStrategy, {useClass: PathLocationStrategy}
+    )
 ]);
 
